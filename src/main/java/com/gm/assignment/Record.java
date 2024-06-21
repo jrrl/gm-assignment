@@ -3,7 +3,6 @@ package com.gm.assignment;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Version;
 
 import java.time.LocalDate;
 
@@ -25,9 +24,7 @@ public class Record {
     @Column(columnDefinition = "DATE")
     private LocalDate toDate;
     @Column
-    private int sortingPriority;
-    @Version
-    private int version;
+    private Integer sortingPriority;
 
     public Record() {}
 
@@ -39,8 +36,7 @@ public class Record {
             String longDescription,
             LocalDate fromDate,
             LocalDate toDate,
-            int sortingPriority,
-            int version) {
+            Integer sortingPriority) {
         this.code = code;
         this.source = source;
         this.codeListCode = codeListCode;
@@ -49,7 +45,6 @@ public class Record {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.sortingPriority = sortingPriority;
-        this.version = version;
     }
 
     public String getCode() {
@@ -108,19 +103,12 @@ public class Record {
         this.toDate = toDate;
     }
 
-    public int getSortingPriority() {
+    public Integer getSortingPriority() {
         return sortingPriority;
     }
 
-    public void setSortingPriority(int sortingPriority) {
+    public void setSortingPriority(Integer sortingPriority) {
         this.sortingPriority = sortingPriority;
     }
 
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
 }

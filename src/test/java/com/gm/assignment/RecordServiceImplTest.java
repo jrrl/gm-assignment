@@ -1,11 +1,14 @@
 package com.gm.assignment;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.ResourceUtils;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +33,6 @@ public class RecordServiceImplTest {
 			12,
 			26
 		),
-		1,
 		1
 	);
 
@@ -65,11 +67,39 @@ public class RecordServiceImplTest {
 						12,
 						26
 					),
-					1,
 					1
 				)
 			)
 		);
+	}
+
+	@Test
+	public void testUploadRecords() throws IOException {
+		File csv = ResourceUtils.getFile("classpath:test.csv");
+		try (InputStream inputStream = new FileInputStream(csv)) {
+			recordService.uploadRecords(inputStream);
+
+			List<Record> savedRecords = recordRepository.findAll();
+
+			List<Record> expectedRecords = List.of(DEFAULT_RECORD,
+				new Record(
+					"code1",
+					"source1",
+					"codeListCode1",
+					"displayValue1",
+					"",
+					LocalDate.of(2024,
+						12,
+						25
+					),
+					null,
+					null
+				));
+
+			for(int i = 0; i < savedRecords.size(); i++) {
+				assertEqualsRecord(expectedRecords.get(i), savedRecords.get(i));
+			}
+		}
 	}
 
 	@ParameterizedTest
@@ -128,6 +158,5 @@ public class RecordServiceImplTest {
 		assertEquals(record.getFromDate(), actualRecord.getFromDate());
 		assertEquals(record.getToDate(), actualRecord.getToDate());
 		assertEquals(record.getSortingPriority(), actualRecord.getSortingPriority());
-		assertEquals(record.getVersion(), actualRecord.getVersion());
 	}
 }
