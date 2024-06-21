@@ -1,0 +1,22 @@
+###
+GET http://localhost:8080/records
+Cache-Control: no-cache
+
+###
+GET http://localhost:8080/records/276885007
+Cache-Control: no-cache
+
+###
+POST http://localhost:8080/records/upload
+Content-Type: multipart/form-data; boundary=boundary
+Cache-Control: no-cache
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="exercise.csv"
+Content-Type: application/csv
+
+< ./exercise.csv
+--boundary
+
+###
+DELETE http://localhost:8080/records
