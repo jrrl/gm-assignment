@@ -12,14 +12,14 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -101,5 +101,31 @@ public class RecordControllerTest {
 				.contentType("application/csv")
 			)
 			.andExpect(status().isOk());
+	}
+
+	@Test
+	public void uploadRecords_InvalidFormat() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "test.csv", "application/csv", "test".getBytes());
+
+		doThrow(new IOException("error")).when(recordService).uploadRecords(any());
+
+		mockMvc.perform(multipart("/records/upload")
+				.file(file)
+				.contentType("application/csv")
+			)
+			.andExpect(status().isUnprocessableEntity());
+	}
+
+	@Test
+	public void uploadRecords_GenericError() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "test.csv", "application/csv", "test".getBytes());
+
+		doThrow(new RuntimeException("error")).when(recordService).uploadRecords(any());
+
+		mockMvc.perform(multipart("/records/upload")
+				.file(file)
+				.contentType("application/csv")
+			)
+			.andExpect(status().is5xxServerError());
 	}
 }

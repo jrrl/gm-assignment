@@ -29,6 +29,9 @@ public class RecordController {
         catch (IOException e) {
             return ResponseEntity.unprocessableEntity().build();
         }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
