@@ -1,5 +1,7 @@
-package com.gm.assignment;
+package com.gm.assignment.service;
 
+import com.gm.assignment.entity.Record;
+import com.gm.assignment.entity.RecordRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,6 @@
-package com.gm.assignment;
+package com.gm.assignment.service;
+
+import com.gm.assignment.entity.Record;
 
 import java.io.IOException;
 import java.io.InputStream;

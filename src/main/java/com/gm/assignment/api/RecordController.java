@@ -1,5 +1,7 @@
-package com.gm.assignment;
+package com.gm.assignment.api;
 
+import com.gm.assignment.entity.Record;
+import com.gm.assignment.service.RecordService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

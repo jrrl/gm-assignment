@@ -1,4 +1,4 @@
-package com.gm.assignment;
+package com.gm.assignment.api;
 
 import java.time.LocalDate;
 

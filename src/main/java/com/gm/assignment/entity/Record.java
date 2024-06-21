@@ -1,4 +1,4 @@
-package com.gm.assignment;
+package com.gm.assignment.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,5 +1,7 @@
-package com.gm.assignment;
+package com.gm.assignment.service;
 
+import com.gm.assignment.entity.Record;
+import com.gm.assignment.entity.RecordRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
