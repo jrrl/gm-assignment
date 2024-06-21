@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class RecordServiceImplTest {
-	public static final Record DEFAULT_RECORD = new Record(
+	private static final Record DEFAULT_RECORD = new Record(
 		"code",
 		"source",
 		"codeListCode",

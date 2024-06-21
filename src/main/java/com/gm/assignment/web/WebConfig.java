@@ -1,4 +1,4 @@
-package com.gm.assignment.api;
+package com.gm.assignment.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
